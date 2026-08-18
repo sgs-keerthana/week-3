@@ -1,0 +1,101 @@
+.sidebar{
+
+    width:260px;
+
+    background:#bfd9f7;
+
+    color:white;
+
+    padding:20px;
+
+    overflow-y:auto;
+
+}
+
+.new-chat{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    margin-bottom:20px;
+
+    background:rgb(25, 117, 210);
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+.chat-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px;
+
+    margin-top:8px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#9ca5a2;
+
+}
+
+.chat-item:hover{
+
+    background:#3b3b3b;
+
+}
+
+.chat-title{
+
+    flex:1;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+.delete-btn{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    color:white;
+
+}
+
+.delete-btn:hover{
+
+    color:red;
+
+}
+
+.empty-chat{
+
+    color:#bfbfbf;
+
+    font-size:14px;
+
+}
