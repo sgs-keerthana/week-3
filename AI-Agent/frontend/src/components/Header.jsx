@@ -11,7 +11,7 @@ function Header() {
             <header className="header">
 
                 <div>
-                    <h1>Workspace AI</h1>
+                    <h1>AI AGENT</h1>
                     <p>Your Intelligent Workspace</p>
                 </div>
 

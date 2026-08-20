@@ -24,7 +24,8 @@ function ChatInput({
             },
             {
                 sender: "ai",
-                text: "Thinking..."
+                text: "Thinking...",
+            
             }
         ]);
 
