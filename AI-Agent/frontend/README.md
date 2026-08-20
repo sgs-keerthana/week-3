@@ -131,3 +131,38 @@ npm run dev
                            │
                            ▼
                          USER
+## Architecture
+
+```mermaid
+flowchart TD
+
+    U[User] --> UI[React Frontend]
+
+    UI --> API[FastAPI Backend]
+
+    API --> DB[(PostgreSQL<br/>Conversation Memory)]
+
+    API --> AGENT[AI Agent<br/>LangChain / LangGraph]
+
+    AGENT --> MODEL[Qwen + Ollama]
+
+    AGENT --> GMAIL[Gmail Tool]
+    AGENT --> CAL[Calendar Tool]
+    AGENT --> WEATHER[Weather Tool]
+
+    GMAIL --> GAPI[Gmail API]
+    CAL --> CAPI[Google Calendar API]
+    WEATHER --> WAPI[Open-Meteo API]
+
+    GAPI --> GMAIL
+    CAPI --> CAL
+    WAPI --> WEATHER
+
+    GMAIL --> AGENT
+    CAL --> AGENT
+    WEATHER --> AGENT
+
+    AGENT --> RESPONSE[Final Response]
+    RESPONSE --> API
+    API --> UI
+```
