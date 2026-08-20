@@ -69,7 +69,7 @@ def extract_email_body(payload):
                 body=extract_email_body(part)
                 if body:
                     return body
-        return""
+    return""
 #GMAIL TOOL
 @tool
 def gmail_tool(
@@ -142,6 +142,7 @@ Actions:
                 )
                 .execute()
             )
+            #extract headers
             headers=message_data.get(
                 "payload",
                 {}
@@ -160,7 +161,7 @@ Actions:
                 f"Subject: {header_data.get('Subject','')}\n"
                 f"Date:{header_data.get('Date','')}"
             )
-            return"\n\n".join(result)
+        return"\n\n".join(result)
     #2. READ EMAIL
     elif action =="read_email":
         if not message_id:

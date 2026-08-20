@@ -86,7 +86,7 @@ def calendar_tool(action: str,
             result.append(
                 f"{start}-{event_title}"
             )
-            return "\n".join(result)
+        return "\n".join(result)
 
         # FIND FREE SLOT
     elif action =="find_free_slot":

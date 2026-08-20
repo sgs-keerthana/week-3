@@ -327,8 +327,7 @@ def chat(
 
                         "duration":
                             round(
-                                duration,
-                                2
+                                duration,2
                             )
                     }
 

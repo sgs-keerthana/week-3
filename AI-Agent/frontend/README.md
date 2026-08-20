@@ -1,63 +1,133 @@
-# Workspace AI
+# AI AGENT
 
-## Project Overview
+Workspace AI is an AI-powered workspace assistant built using React, FastAPI, LangChain/LangGraph, Qwen, and Ollama.
 
-Workspace AI is a full-stack AI Chat Assistant built using React, FastAPI, PostgreSQL, SQLAlchemy, and Ollama. It provides a ChatGPT-like interface with persistent chat history and streaming AI responses.
-
----
+It provides a single natural-language chat interface for Gmail, Google Calendar, and Weather. The AI agent selects the required tool based on the user's request and can perform multi-tool workflows.
 
 ## Features
 
-- AI Chat using Ollama
-- Streaming Responses
-- PostgreSQL Database
-- Conversation History
-- Recent Chats Sidebar
-- Markdown Rendering
-- Conversation Memory
-- Dynamic Model Settings
-
----
+- AI Agent using Qwen + Ollama
+- Gmail search, read, draft, classification, and labeling
+- Google Calendar event retrieval, free-slot search, and event creation
+- Current weather and forecast
+- Multi-tool orchestration
+- PostgreSQL conversation memory
+- Streaming AI responses
+- Terminal execution logs
+- Google OAuth authentication
 
 ## Tech Stack
+Frontend: React
+Backend: FastAPI
+Language: Python
+Agent: LangChain / LangGraph
+LLM: Qwen3.5 :4b
+Local Model Runtime: Ollama
+Database: PostgreSQL
+ORM: SQLAlchemy
+Email: Gmail API
+Calendar: Google Calendar API
+Weather: Open-Meteo API
 
-Frontend
-- React
-- CSS
-- Fetch API
+## PROJECT STRUCTURE
+AI-Agent/
+├── backend/
+│   ├── tools/
+│   │   ├── gmail.py
+│   │   ├── calendar.py
+│   │   └── weather.py
+│   ├── agent.py
+│   ├── main.py
+│   ├── crud.py
+│   ├── database.py
+│   ├── db_models.py
+│   ├── schemas.py
+│   ├── settings.py
+│   └── requirements.txt
+│
+├── frontend/
+│   └── ...
+│
+├── README.md
+└── .gitignore
 
-Backend
-- FastAPI
-- SQLAlchemy
-- PostgreSQL
-- Ollama
-
----
-
-## Installation
-
-### Backend
-
+## Backend setup
 cd backend
-
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
-
 uvicorn main:app --reload
 
-### Frontend
+## Ollama setup
+ollama pull qwen3.5:4b
 
+## Google authentication setup
+1. Create a Google Cloud Project
+2. Configure OAuth Consent Screen.
+3. Create OAuth Credentials
+4. Gmail Authentication
+5. Calendar Authentication
+
+## Frontend setup
 cd frontend
-
 npm install
-
 npm run dev
 
----
 
-## Usage
-
-1. Start PostgreSQL
-2. Start Ollama
-3. Start FastAPI
-4. Start React
-5. Open http://localhost:5173
+## Flow
+                         USER
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │  React Frontend │
+                  │  Chat Interface │
+                  └────────┬────────┘
+                           │
+                    POST /chat
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ FastAPI Backend │
+                  └────────┬────────┘
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+       PostgreSQL                  Conversation
+       Database                    Context
+              │                         │
+              └────────────┬────────────┘
+                           ▼
+                    ┌─────────────┐
+                    │  AI Agent   │
+                    │ Qwen+Ollama │
+                    └──────┬──────┘
+                           │
+                 Agent decides tool
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+      Gmail Tool      Calendar Tool    Weather Tool
+          │                │                │
+          ▼                ▼                ▼
+      Gmail API       Google Calendar   Open-Meteo
+                           API              API
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                     Tool Result(s)
+                           │
+                           ▼
+                      AI Agent
+                           │
+                  Generate final answer
+                           │
+                           ▼
+                  FastAPI Streaming
+                           │
+                           ▼
+                    React Frontend
+                           │
+                           ▼
+                         USER
